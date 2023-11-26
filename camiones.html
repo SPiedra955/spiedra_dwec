@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Camiones</title>
+  </head>
+  <body>
+    <h2>Asignación de camiones</h2>
+    <script>
+
+        /* El objetivo de este ejercicio es asignar a cada camión un conductor
+        * además hemos de asegurar que cada conductor no repita camion y 
+        * el uso rotativo de los camiones.
+        */
+
+       const conductores = ["Juan", "Pep", "Toni"];
+       let camiones = ["Man", "Scania", "Iveco", "Volvo"];
+       let num_semanas = 52; // Semanas de un año
+
+
+      for(let semana = 1 ; semana <= num_semanas ; semana++){
+       let asignacionCamiones = "";
+       for(let i = 0; i < conductores.length ; i++){
+           let persona = conductores[i];
+           /* Hacemos la rotacion con 'semana + i' junto con el modulo
+           * i -> es la iteracion de la array por indice de conductores
+           * es importante ya que hace que los indices se muevan 0->1->2
+           * y la longitud de la array que queremos rotar para que al
+           * calcular el modulo se mantenga dentro del tamaño del array
+           */
+           let rotacion = camiones[(semana + i) % camiones.length];
+           asignacionCamiones += persona + " conduce " + rotacion + " | ";
+       }
+       console.log("Semana " + semana + ": " + asignacionCamiones)
+    }
+    
+
+    </script>
+  </body>
+</html>
