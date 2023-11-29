@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas hogar</title>
+</head>
+<body>
+    <script>
+        /*
+        * Las familias Sastre, Torrens y Moll quieren planificar las tareas semanales que tienen que hacer 
+        * en sus respectivas casas para repartirlas equitativamente entre sus miembros.
+        *
+        * La familia Sastre  consta de: padre, madre, hijo e hija y sus tareas son: 
+        * poner lavadora, limpiar cocina y limpiar baño.
+        * La familia Torrens consta de: padre, madre, hijo e hija y solo quiere repartir dos tareas semanales:
+        * planchar y  limpiar baño.
+        * La familia Moll consta de: padre, madre, hijo, hija grande e hija pequeña y quiere repartir 5 tareas:
+        * poner lavadora, limpiar cocina, limpiar comedor, planchar y limpiar baño.
+        * La familia Sastre quiere una planificación anual de sus tareas (52 semanas).
+        * La familia Torrens, en cambio, quiere una planificación mensual de 4 semanas.
+        * La familia Moll, quiere una planificación de 12 semanas, es decir, trimestral.
+        * Crear un algoritmo (solo uno) que resuelva cualquier de estas casuísticas (u otras futuras) y 
+        * que muestre por pantalla la solución proporcionada para que, cada semana, el programa diga qué 
+        * tarea tiene que hacer cada miembro de la familia.
+        *
+        * Recordad usar orientación a objetos.
+        */
+
+
+        function tareasHogar(familia, familiares, tareas, semanas){
+            this.familia = familia;
+            this.familiares = familiares;
+            this.tareas = tareas;
+            this.semanas = semanas;
+            (function(){
+                console.log('Planificación Familia ' + familia)
+            })();
+
+            for(let semana = 1; semana <= semanas; semana++){
+                let asignacionTareas = "";
+
+                for(let i = 0; i < familiares.length; i++){
+                    let persona = familiares[i];
+                    let rotacionTareas = tareas[(semana + i) % tareas.length];
+
+                    asignacionTareas += persona + ' ' + rotacionTareas + ' | ';
+                }
+
+                console.log("Semana " + semana + ": " + asignacionTareas)
+            }
+
+
+
+        }
+
+        let familiaSastre = new tareasHogar('Sastre', ['padre', 'madre', 'hijo', 'hija'],['poner lavadora', 'limpiar cocina', 'limpiar baño'],52);
+        let familiaTorrens = new tareasHogar('Torrens', ['padre', 'madre', 'hijo', 'hija'], ['planchar', 'limpiar baño'],4);
+        let familiaMoll = new tareasHogar('Moll', ['padre', 'madre', 'hijo', 'hija grande' ,'hija pequeña'],['poner lavadora', 'limpiar cocina', 'limpiar comedor', 'planchar', 'limpiar baño'], 12);
+        console.log(familiaSastre);
+        console.log(familiaTorrens);
+        console.log(familiaMoll);
+    </script>
+    
+</body>
+</html>
