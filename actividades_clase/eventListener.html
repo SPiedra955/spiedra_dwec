@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+    <script>
+        /*
+        Eventos, es una función que se ejecuta después de que el usuario
+        elige una acción en concreto
+        (clickar, doble click, scroll...)
+
+        1) Usando el HTML <p onACCION="">
+            <p onclick='hola()'>
+        2) Listener que este esuchando el onclick
+        */
+
+    </script>
+
+    <p>Hola, que tal, si clickas me vuelvo rojo</p>
+    <p>Hola, que tal, si clickas me vuelvo rojo</p>
+    <p>Hola, que tal, si clickas me vuelvo rojo</p>
+    <p>Hola, que tal, si clickas me vuelvo rojo</p>
+
+
+    
+    <script>
+        function pinta(){
+            document.querySelector("p").style.color = "red";
+        }
+        document.querySelector("p").addEventListener("click", pinta);
+
+        var parrafos = document.querySelectorAll("p");
+        for(var i = 0; i < parrafos.length; i++){
+            parrafos[i].addEventListener('click', function(){
+                for(var j=0; j < arguments.length; j++){
+
+                    console.log(arguments[j]);
+                }
+            })
+        }
+    </script>
+
+
+</body>
+</html>

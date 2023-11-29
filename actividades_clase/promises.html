@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promises</title>
+  </head>
+  <body>
+    <script>
+      /*
+      Una promise es una objeto para representar un comportamiento asincrono,
+      asincrono(no sabemos cuando va a acabar).
+
+      Una promesa tiene 3 estados:
+
+      * Pending(pendiente)
+      * Fullfilled(completado)
+      * Rejected(rechazado)
+      */
+
+      const x = new Promise(function(resolve, rejected){
+
+      });
+
+      /*
+
+      x estará pending hasta que se llame a 'resolve' o 'reject'
+
+      Cuando se acaba la promesa se llama al metodo:
+          -'then' si ha finalizado bien(resolve)
+          -'catch' si ha ido mal(rejected)
+      */
+
+  /*    const wait = new Promise(function(resolve, rejected){
+
+          setTimeout(function(){
+              resolve('Finalizo bien');
+              rejectd('Finalizo mal');
+          }, 5000)
+
+      }).then(function(valor){
+          console.log('Ha entrado en el then', valor);
+          console.log('Resuelta', wait);
+
+      }).catch(function(valor){
+          console.log('Ha entrado en el catch');
+      });
+      console.log("Pendiente", wait);
+
+      setTimeout(function(){
+        console.log('Despues resolve', wait)
+      }, 8000) */
+
+
+      //Ajax fetch(ES6)
+
+
+      fetch('http://95.39.145.183/ejercicios/color.php?min=200&max=300', {
+        method: 'GET'
+      }).then(function(respuesta1){
+        /*
+        Respuesta1.text(); texto plano
+        Respuesta1.json(); JSON
+        Respuesta1.blob(); archivo binario
+        */
+
+        return respuesta1.json();
+      }).then(function(respuesta2){
+        console.log('Respuesta 2', respuesta2)
+      })
+
+      /* fetch("http://"'http://95.39.145.183/ejercicios/color.php")
+      method: 'POST',
+      body: 'min=200&max=300',
+      headers:{
+        "Content-type": "application/x-www-form-urlencoded"
+      }
+      */
+    </script>
+  </body>
+</html>

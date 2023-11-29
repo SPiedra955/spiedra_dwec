@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        Matematicas
+        poniendo 'pi' Math.pi
+        funcion 'suma' que admite 'n' valores
+        function suma(){
+            arguments[0] = 3;
+            arguments[1] = 47;
+            arguments[2] = 6;
+        }
+        suma(3, 47, 6);
+
+        funcion multiplica que tambien tiene que admitir 'n' valores
+        la funcion multiplica debe añadirse despues de crear el objeto.
+
+
+        resolver ops:
+
+        4+5+PI+3*4*7
+        4*PI*8(12+4+7)
+        */
+
+    const mates ={
+        pi:Math.PI,
+        suma: function(){
+            console.log(arguments);
+            if(arguments){
+                let resultado = 0;
+
+                for(let i = 0; i < arguments.length; i++){
+                    resultado += arguments[i];
+                }
+                return resultado;
+            }
+            return 0;
+        }
+    }
+
+    mates.multiplica=function(){
+        console.log(arguments)
+        if(arguments){
+            let resultado = 0;
+            for(let i = 0; i < arguments.length; i++){
+                resultado += arguments[i];
+            }
+            return resultado;
+        }
+        return 1;
+    }
+
+    const op1 = mates.suma(4, 5, mates.pi, mates.multiplica(3, 5));
+    const op2 = mates.multiplica(4, mates.pi, 8, mates.suma(12, 4, 7));
+    console.log(op1);
+    console.log(op2);
+
+
+    /*
+    FUNCIONES AVANZADAS
+    */
+
+        // arguments <-- num args
+        // son valores
+        // clousures <-- ES6
+
+    /*CLOUSURES*/
+
+    function clousure(a, b){
+        function esnclousure(x, y){
+            return x + y;
+        }
+
+        function esnclousure2(x ,y){
+            return x * y;
+        }
+
+        return esnclousure(a, b) - esnclousure2(a, b);
+
+    }
+
+    console.log(clousure(3,4)); 
+
+
+    setTimeout(function(){
+        clousure(6,7);
+    }, 1000)
+
+    setTimeout(() => {
+        clousure(6, 7)
+    },1000) 
+
+    function suma(a , b){
+        return a + b;
+    }
+    function mult(a , b){
+        return a * b;
+    }
+    function alteracion(a, b, cb){
+        return cb(a, b);
+    }
+
+    console.log(alteracion(3 , 4, suma));
+    console.log(alteracion(3 , 4, mult));
+    console.log(alteracion(3 , 4, function(a, b){
+        return a - b;
+    }))
+
+    console.log(alteracion(3 ,4, (a,b) => {
+        return a - b;
+    }))
+
+    console.log(alteracion(3, 4, (a, b) => a - b));
+    console.log(alteracion(3, 4, a => a - a));
+
+
+    
+
+
+
+    </script>
+    
+</body>
+</html>

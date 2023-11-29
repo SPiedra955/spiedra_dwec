@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+</head>
+<body>
+
+    <script>
+        /*
+        CALLBACK, es una función que por parametros se pasa 
+        la especificación 
+        */
+
+        function hello(){
+            return "Hello";
+        }
+
+        function bye(){
+            return "Bye";
+        }
+
+        /*
+        nombre-str/ tipo-callback 
+        */
+        function saluda(nombre, tipo){
+            return tipo() + " " + nombre;
+        }
+
+        console.log(saluda("Alex", hello));
+        console.log(saluda("Rafa", bye));
+        console.log(saluda("Mamadol", function(){
+            return "Hasta luego";
+        }));
+
+        setTimeout(function(){
+            console.log("3s más tarde");
+        }, 3000)
+        
+
+    </script>
+    
+</body>
+</html>

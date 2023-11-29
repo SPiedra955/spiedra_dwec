@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        /*
+        Variables en ES5 se usaba var
+        ES6 - let, const
+
+        let - asigna variable(sobreescribir)
+
+         */
+
+         let x = 4;
+         x = 5;
+
+         const y = 5;
+         // y = 6 = ERROR
+
+         const z = [];
+         z.push("hola");
+         z.push("adios");
+        // z = ["hola"] = ERROR
+
+
+        const pep = {
+            name : "Pep",
+            surname : "Toni"
+        }
+        pep.name = 'Joan'
+        // pep = {name : 'Joan'}  ERROR
+
+        /*
+        - Usamos CONST porque es mas rapido
+        - Aseguramos el tipo de variable
+        - Evita problemas de inicialización
+        */
+
+        // const a; las constantes se han de definir siempre
+
+        /*
+        let/const tienen ambito de bloque, si no declaras HOISTING
+        */
+
+        function vanilla(){
+            for(var i = 0; i < 5; i++){
+                var j = i + 3;
+                console.log("i", i,"j" ,j);
+            }
+        }
+
+        vanilla();
+
+
+        // Redeclarar variable
+        function redeclare(){
+            var x = 3;
+            var x = 4;
+            console.log(x);
+
+            let y = 2;
+            // let y = 3; no deje reescribir variables
+            console.log(y);
+        }
+
+        redeclare();
+
+        /* Hoisting el ambito de una local declarada con
+         var/let/const y no definida
+        */
+        
+        function hoist(){
+            var h1 = "no hoisted";
+            console.log("hoist", h1);
+        }
+
+        hoist();
+
+        function hoist2(){
+            console.log("hoist", h1);
+        }
+
+        hoist2();
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Window</title>
+</head>
+<body>
+
+    <button onclick="newWindow()">Abrir</button>
+    <button onclick="closeWindow()">Cerrar</button>
+    <button onclick="refresh()">Recargar</button>
+    <button onclick="ask()">Tu nombre</button>
+    <p id="result"></p>
+
+
+
+    <script>
+        var ventana;
+        function newWindow(){
+            ventana = window.open("https://www.marca.com/", "nueva ventana",  "width=250 height=300px")
+        }
+
+        function closeWindow(){
+            if(ventana){
+                 ventana.close();
+            }
+        }
+
+        function refresh(){
+            window.location.reload();
+        }
+
+        function ask(){
+            let name = prompt("Escribe tu nombre");
+            if(name != null){
+                var p = document.createElement("p");
+                var newP = document.createTextNode("Hola " + name);
+                p.appendChild(newP);
+                document.getElementById("result").appendChild(p);
+               
+            }
+
+        }
+
+
+    </script>
+    
+</body>
+</html>

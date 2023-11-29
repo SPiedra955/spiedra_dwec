@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mates</title>
+
+</head>
+<body>
+    Esto es una página de Matematicas
+
+    <script type="module">
+        import{suma, multiplica} from './mates.js';
+        import{binaria, multiplicaBin as multiBin} from './matesBinaria.js';
+
+
+        console.log(suma(4, 7));
+        console.log(multiplica(4, 7));
+        console.log(binaria(4, 7));
+        console.log(multiplicaBin(4, 7));
+        /* modulo js, fichero que exporta items de js
+        (variables, funciones, claves...)
+
+        se cargan con un import
+        que partes queremos cargan con DESTRUCTING
+            {a, b, c, d...}
+        Si no se define que propiedad cargar se admite default
+        Admite ambiguedad
+
+        para que funcione se declara como modul
+
+        !!! El DOM no tiene visibilidad en los modulos
+        */
+    </script>
+  
+</body>
+</html>

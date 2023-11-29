@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuarios</title>
+  </head>
+  <body>
+    <script>
+      /*
+        Crear una tabl en html de usuarios recuperando los de la URL:
+        http://95.39.145.183/ejercicios/usuarios.php
+        METHOD: GET
+        response: JSON
+        tabla: username, name . surename y sex
+        */
+
+      function users() {
+
+        let tabla = document.createElement("table");
+        let thUsers = document.createElement("th");
+        thUsers.innerHTML = 'Username'
+        tabla.appendChild(thUsers);
+
+        let thName = document.createElement("th");
+        tabla.appendChild(thName);
+        thName.innerHTML = 'Name';
+        document.body.appendChild(tabla);
+
+        let thSur = document.createElement("th");
+        tabla.appendChild(thSur);
+        thSur.innerHTML = 'Surname';
+        document.body.appendChild(tabla);
+
+        let thSx = document.createElement("th");
+        tabla.appendChild(thSx);
+        thSx.innerHTML = 'Sex';
+        document.body.appendChild(tabla);
+
+        fetch("http://95.39.145.183/ejercicios/usuarios.php", {
+          method: "GET",
+        })
+          .then(function (respuesta) {
+            return respuesta.json();
+          })
+          .then(function (respuesta2) {
+           //  console.log("respuesta2", respuesta2);
+
+            for (let i = 0; i < respuesta2.length; i++) {
+    
+            //  console.log(respuesta2[i].username);
+
+              let tabla = document.createElement("table");
+              let tdUser = document.createElement('td');
+              tabla.appendChild(tdUser);
+              tdUser.innerHTML += respuesta2[i].username;
+              document.body.appendChild(tabla)
+
+              let tdName = document.createElement('td');
+              tabla.appendChild(tdName);
+              tdName.innerHTML += respuesta2[i].name;
+              document.body.appendChild(tabla);
+
+              let tdS = document.createElement('td');
+              tabla.appendChild(tdS);
+              tdS.innerHTML += respuesta2[i].surname;
+              document.body.appendChild(tabla);
+
+              let tdSx = document.createElement('td');
+              tabla.appendChild(tdSx);
+              tdSx.innerHTML += respuesta2[i].sex;
+              document.body.appendChild(tabla);
+            }
+          });
+      }
+
+      users();
+
+      /*
+        El tamaño del texto sera definido por width, color de letra color y
+        fondo tabla -> bakcground
+        */
+    </script>
+  </body>
+</html>

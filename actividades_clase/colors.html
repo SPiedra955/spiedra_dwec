@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors</title>
+</head>
+<body>
+
+    <div id="cuadrao"></div>
+
+    <script>
+
+        let xhttp = new XMLHttpRequest;
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4){
+                console.log(this.responseText);
+                // Obtener valores por pantalla
+                // document.getElementById("cuadrao").innerHTML += this.responseText + "<br>";
+                let respuesta = this.responseText;
+                let pars = JSON.parse(respuesta)
+                let div = document.querySelector('#cuadrao');
+                div.style.height = pars.height + 'px';
+                div.style.width = pars.width + 'px';
+                div.style.backgroundColor = pars.color
+                document.querySelector('body').style.backgroundColor = pars.background
+            }else{
+                console.log('El estado es: ' + this.readyState);
+            }
+        }
+        xhttp.open('GET', 'http://95.39.145.183/ejercicios/color.php?min=200&max=300');
+        xhttp.send();
+    </script>
+    
+</body>
+</html>

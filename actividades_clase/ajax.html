@@ -1,0 +1,60 @@
+.<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+<body>
+<h1>My first Ajax</h1>
+<div id="result">Aqui pondremos el GET</div>
+    <script>
+        /*
+        AJAX(Asynchronous Javascript And XML)
+        tecnologia que invento microsoft para realizar comunicación
+        asincrona con nuestra WEB
+
+        Ex..
+        animals.html -> servidor(MySQL)
+        objeto animal <- JSON
+
+        const animal = getAnimals();
+        for(let i = 0; i < animal.length ; i++){
+
+        }
+
+
+        XMLHttpRequest <- Objeto que invento microsoft. Ventajas:
+        1. Puedes cargar una parte del DOM
+        2. 
+        */
+       
+        //xhttp.open('POST', 'http://95.39.145.183/asincrono2.php', true);
+        //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        // https://www.openjs.com/articles/ajax_xmlhttp_using_post.php?authuser=0
+
+
+        // xhttp.open('GET', 'http://95.39.145.183/asincrono.php?num=1')
+
+        for(let i = 0; i <= 10; i++){
+        let xhttp = new XMLHttpRequest;
+        let params = "num=";
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4){
+                console.log(this.responseText);
+                document.getElementById("result").innerHTML += this.responseText + "<br>";
+
+            }else{
+                console.log('El estado es: ' + this.readyState);
+            }
+        }
+        xhttp.open('POST', 'http://95.39.145.183/asincrono.php?'+ params + i );
+        xhttp.send();
+
+
+        }
+
+        
+    </script>
+</body>
+</html>

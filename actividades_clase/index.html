@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM.CSS</title>
+</head>
+<body>
+    <p class="saludo" id="primero">Hola</p>
+    <p class="saludo">Que</p>
+    <p>Tal</p>
+
+    <script>
+        // 1) cambiar la palabra hola por adios y ponerla color azul
+        var h = document.querySelector("#primero");
+        h.innerHTML = "Adios";
+        h.style.color = "blue";
+
+        // 2) pintar la clase saludo de rojo que sobreescribira la azul
+        // por amarillo
+
+        var r = document.querySelectorAll(" .saludo");
+        // devuelve un array con todos los elementos introducidos 
+        for(var i = 0; i < r.length; i++){
+            r[i].style.color = "red";
+            r[i].style.backgroundColor = "yellow";
+        }
+
+        // 3) añadir a la palabra un "?" concantenando strings
+
+        document.querySelector("p:nth-child(3)").innerHTML += "?"
+
+        // 4) añadir una foto delante de la palabra adios
+        // con 100 px de ancho
+        h.innerHTML += "<img src='foto.jpg'  width='100px'/>"  ;
+
+        
+
+
+
+    </script>
+    
+</body>
+</html>

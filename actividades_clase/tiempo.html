@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones de tiempo</title>
+</head>
+<body>
+
+    <span id="crono" class="cronometro">00:00:00</span>
+    <br>
+    <button id="play" onclick="play()">Start</button>
+    <button id="pause" onclick="pause()">Pause</button>
+    <button id="stop" onclick="Stop()">Stop</button>
+
+    <script>
+
+        /*
+        Funciones de tiempo
+        seTimeout(funcion, ms);
+        
+        Ejecuta la funcion cada ms periodicamente
+        setInterval(funcion, ms)
+
+        clearInterval(funcion, ms);
+
+        */
+
+        let crono;
+        let cronoDif;
+        let interval;
+     
+
+        function play(){
+            // si crono no esta definido reinicialo
+            if(!crono){
+            crono = Date.now();
+        }
+
+        interval = setInterval(function(){
+            cronoDif = Date.now();
+            let dif = cronoDif - crono;
+
+            let dateDif = new Date(dif);
+            let result = "";
+            result += dateDif.getHours() - 1;
+            result += ":"
+            result += dateDif.getMinutes();
+            result += ":";
+            result += dateDif.getSeconds();
+            result += ":";
+            result += dateDif.getMilliseconds();
+
+            document.querySelector("#crono").innerHTML = result;
+
+        }, 100)
+    }
+
+        function pause(){
+            clearInterval(interval);
+        }
+
+        function Stop(){
+            clearInterval(interval);
+            document.querySelector(".cronometro").innerHTML = "00:00:00";
+        }
+    </script>
+</body>
+</html>
