@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise all</title>
+</head>
+<body>
+
+    <script>
+
+        /*
+        * Crea una tabla en html de usuarios recuperando los datos de:
+        * URL: http://95.39.145.183/ejercicios/usuarios.php
+        *        http://34.147.66.205/ejercicios/usuarios.php
+        *    method: GET
+        *    response: JSON
+        * Tabla: Username, Name, Surname y Sex
+        */
+
+        function getUsers(color, background, width){
+
+            const tabla = document.createElement("table");
+            tabla.style.coloer = color;
+            tabla.style.backgroundColor = background;
+            tabla.style.fontSize = width + "px";
+
+            const trHeader = document.createElement("TR");
+            tabla.appendChild(trHeader);
+
+            const thUsername = document.createElement("TH");
+            thUsername.innerHTML = "Username";
+            tabla.appendChild(thUsername);
+
+            const thName = document.createElement("TH");
+            thName.innerHTML = "Name";
+            tabla.appendChild(thName);
+
+            const thSurname = document.createElement("TH");
+            thSurname.innerHTML = "Surname";
+            tabla.appendChild(thSurname);
+
+            const thSex = document.createElement("TH");
+            innerHTML = "Sex";
+            tabla.appendChild(thSex);
+
+            fetch("http://95.39.145.183/ejercicios/usuarios.php")
+            .then((r) => r.json())
+            .then((respuesta) =>{
+                console.log(respuesta);
+
+                for(let i = 0; i < respuesta.length; i++){
+                    console.log(respuesta[i]);
+                }
+            })
+        ()}
+    </script>
+    
+</body>
+</html>
