@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comillas</title>
+</head>
+<body>
+
+    <p id="resultado"></p>
+    <script>
+        // hasta ahora "" ''
+        // nuevas ``
+
+        /* Ventajas 
+            - Permite el uso de '' "" dentro
+            - Evitan concatenaciones y queda mas claro el codigo
+            - Permiten escribir variables sin cerrar comillas
+            - Multilinea
+        */
+
+        const a = "es un string"
+            "multilinea" +
+            "guay";
+            
+        const a2 = `es un string
+        multilinea 
+        guay`;
+
+        // <a href="index.html"> Esto es un link <a/>
+            // dobles
+            document.querySelector("#resultado")
+            .innerHTML = "<a href="index.html"> Esto es un link </a>";
+
+            // simples
+            document.querySelector("#resultado")
+            .innerHTML = '<a href="index.html"> Esto es un link </a>';
+            
+            // nuevas comillas
+            document.querySelector("#resultado")
+            .innerHTML = `<a href="index.html"> Esto es un link </a>`;
+
+            // dobles
+            const url = "www.g.com";
+            const txt = "Esto es una prueba";
+            document.querySelector("#resultado")
+            .innerHTML = "<a href"+ url +">" + txt+"</a>";
+
+            // nuevas 
+            document.querySelector("#resultado")
+            .innerHTML = `<a href=${url}>${txt}+</a>`;
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase</title>
+</head>
+<body>
+
+    <p id="demo"></p>
+
+    <script>
+
+        // Declaration 
+
+        class Person {
+            
+            /* Depending on the context which it's used this can refer to
+            *  the object(this case) or the global object, in this case we are binding
+            *  a variable and value.
+            */
+            constructor(name, surname){
+                /* Constructor: method to create and initiate an object formed 
+                *  by a class
+                */
+                this.name = name;
+                this.surname = surname;
+            }
+
+            getName(){
+                return this.name;
+            }
+
+            getSurname(){
+                return this.surname;
+            }
+
+            setName(otherName){
+                this.name = otherName;
+            }
+
+            setSurname(newSurname){
+                this.surname = newSurname;
+            }
+
+            fullName(){
+                return this.name + " " + this.surname;
+
+            }
+        }
+
+        let person = new Person('Samuel', 'Piedra');
+        //document.getElementById("demo").innerHTML = person.getName();
+        //document.getElementById("demo").innerHTML = person.getSurname();
+        person.setName('Samux');
+        person.setSurname('Piedrax');
+        document.getElementById("demo").innerHTML = person.fullName();
+
+    </script>
+    
+</body>
+</html>
