@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spain map</title>
+  </head>
+  <body>
+    <h1 id="result"></h1>
+
+    <div id="provinces">
+      <img
+        id="andalucia"
+        src="./img/andalucia.png"
+        alt="andalucia"
+        coords="390,729,478,791,515,840,575,810,636,798,739,785,830,764,831,685,786,632,723,625,641,643,577,596,546,625,501,668,425,654"
+      />
+      <img
+        id="castilla"
+        src="./img/castellalamanxa.png"
+        alt="castilla"
+        coords="809,323,862,362,877,452,897,553,871,600,819,629,767,610,670,620,614,584,595,557,627,534,586,501,571,446,600,434,639,425,671,425,706,442,754,436,729,310"
+      />
+      <img
+        id="catalunya"
+        src="./img/catalunya.png"
+        alt="catalunya"
+        coords="1080,136,1152,168,1261,181,1255,243,1181,292,1109,319,1041,376,1031,333,1049,255"
+      />
+      <img
+        id="galicia"
+        src="./img/galicia.png"
+        alt="galicia"
+        coords="370,232,415,220,427,183,421,93,384,19,337,25,261,76,230,99,250,144,273,179,259,222,320,232"
+      />
+    </div>
+
+    <div id="text">
+      <img src="./img/espana2.gif" usemap="#image-map" id="map" />
+
+      <map name="image-map">
+        <area
+          target=""
+          alt="catalunya"
+          href=""
+          coords="1080,136,1152,168,1261,181,1255,243,1181,292,1109,319,1041,376,1031,333,1049,255"
+          shape="poly"
+        />
+        <area
+          target=""
+          alt="castilla"
+          href=""
+          coords="809,323,862,362,877,452,897,553,871,600,819,629,767,610,670,620,614,584,595,557,627,534,586,501,571,446,600,434,639,425,671,425,706,442,754,436,729,310"
+          shape="poly"
+        />
+        <area
+          target=""
+          alt="andalucia"
+          href=""
+          coords="390,729,478,791,515,840,575,810,636,798,739,785,830,764,831,685,786,632,723,625,641,643,577,596,546,625,501,668,425,654"
+          shape="poly"
+        />
+        <area
+          target=""
+          alt="galicia"
+          href=""
+          coords="370,232,415,220,427,183,421,93,384,19,337,25,261,76,230,99,250,144,273,179,259,222,320,232"
+          shape="poly"
+        />
+      </map>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
