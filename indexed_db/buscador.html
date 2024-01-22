@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de ciudades</title>
+</head>
+<body>
+    <h2>Buscador de ciudades</h2>
+    <input type="text" placeholder="Search.." id="searchInput">
+    <div id="result"></div>
+    <script>
+        (function () {
+            const openDb = indexedDB.open('cities', 1);
+
+            openDb.onupgradeneeded = async function (e) {
+                let db = e.target.result;
+                let objectStore = db.createObjectStore('city', { autoIncrement: true });
+
+                let response = await fetch('https://raw.githubusercontent.com/David-Haim-zz/CountriesToCitiesJSON/master/countriesToCities.json');
+                let result = await response.json();
+
+                const countries = Object.keys(result);
+
+                const countriesObj = countries.map((country) => {
+                    return {
+                        country: country,
+                        cities: result[country]
+                    };
+                });
+
+                console.log(countriesObj);
+
+                const transaccion = openDb.result.transaction(['city'], 'readwrite');
+                const city = transaccion.objectStore('city');
+
+                countriesObj.forEach(countryElement => {
+                    countryElement.cities.forEach(cityElement => {
+                        city.add({
+                            ciudad: cityElement,
+                            country: countryElement.country
+                        });
+                    });
+                });
+
+                document.querySelector('#searchInput').addEventListener('input', function (e) {
+                    const valor = e.target.value;
+                    console.log(valor);
+                    if (valor.length >= 3) {
+                        busca(valor);
+
+                        history.pushState({
+                            buscar: valor,
+
+                        }, '', '?valorBusqueda=' + valor)
+                    }
+                });
+
+                window.onpopstate = function(event){
+
+                    if(event && event.state && even.state.buscar){
+                        busca(event.state.buscar);
+                        document.querySelector('input').value
+                    }
+
+                }
+
+                function busca(valor) {
+                    console.log("buscando...");
+
+                    const db = openDb.result;
+
+                    const transaccion = db.transaction(['city'], 'readonly');
+                    const city = transaccion.objectStore('city');
+                    const cities = city.getAll();
+                    cities.onsuccess = function (e) {
+                        const citiesAll = e.target.result;
+                        console.log(citiesAll);
+                        const citiesFiltered = citiesAll.filter((city) => {
+                            return city.ciudad.toUpperCase().indexOf(valor.toUpperCase()) !== -1;
+                        });
+                        console.log(citiesFiltered);
+                        document.querySelector('#result').innerHTML = '<table id="tabla"></table>';
+                        const table = document.querySelector('#tabla');
+                        citiesFiltered.forEach((city, index) => {
+                            const row = table.insertRow(index);
+                            row.insertCell(0).innerHTML = city.ciudad.toUpperCase()
+                                .split(valor.toUpperCase()).join(`<span style='background-color: yellow'> ${valor.toUpperCase()}</span>`);
+                            row.insertCell(1).innerHTML = city.country;
+                        });
+                    };
+
+                    cities.onerror = function (event) {
+                        console.error("Error retrieving cities:", event.target.error);
+                    };
+
+                    transaccion.onerror = function (event) {
+                        console.error("Transaction error:", event.target.error);
+                    };
+                }
+            };
+
+            openDb.onerror = function (event) {
+                console.error("Error opening the database:", event.target.error);
+            };
+        })();
+    </script>
+</body>
+</html>

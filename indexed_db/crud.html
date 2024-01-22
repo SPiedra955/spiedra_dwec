@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=C, initial-scale=1.0">
+    <title>CRUD</title>
+</head>
+<body>
+    <input type="text" id="nombre">
+    <input type="text" id="color">
+    <button onclick="insertFruit()">Insertar fruta</button>
+    <button onclick="deleteFruit()">Borrar fruta</button>
+    <button onclick="updateFruit()">Actualizar fruta</button>
+    <button onclick="getFruits()" >Listar frutas</button>
+    <button onclick="getGreenFruits()" >Listar frutas verdes</button>
+
+
+
+
+    <script>
+        const db = indexedDB.open('Frutas', 2);
+        // Solo entra si la version es superior a la que hay instalada
+        db.onupgradeneeded = function(ev){
+            const database = ev.target.result;
+
+            const frutaObjStore = database.createObjectStore('Fruta', { keyPath:'name'});
+
+            frutaObjStore.createIndex('color', 'color', {unique: true});
+
+            frutaObjStore.add({
+                name: 'aguacate',
+                color: 'verde',
+            })
+
+            frutaObjStore.add({
+                name: 'platano',
+                color: 'amarillo',
+            })
+        }
+
+        function insertFruit() {
+            const nombre = document.querySelector('#nombre').value;
+            const color = document.querySelector('#color').value;
+
+
+            const transaccion = db.result.transaction(['Fruta'], 'readwrite');
+            transaccion.objectStore('Fruta').add({
+                name: nombre,
+                color: color,
+            })
+        }
+
+
+        function deleteFruit(){
+            const nombre = document.querySelector('#nombre').value;
+            
+
+            const transaccion = db.result.transaction(['Fruta'], 'readwrite');
+            transaccion.objectStore('Fruta').delete(nombre);
+        }
+
+        // put
+        // 1) añadir un color a la fruta
+        // 2) modificar, añadir y eliminar con el color
+        // 3) Crear la funcion modificar (put)
+
+        function updateFruit(){
+            const nombre = document.querySelector('#nombre').value;
+            const color = document.querySelector('#color').value;
+
+            const transaccion = db.result.transaction(['Fruta'], 'readwrite');
+            transaccion.objectStore('Fruta').put({
+                name: nombre,
+                color: color,
+            })
+        }
+
+        function getFruits(){
+            const transaccion = db.result.transaction(['Fruta'], 'readwrite');
+            const fruitTable = transaccion.objectStore('Fruta').getAll();
+
+            fruitTable.onsuccess = function(ev){
+                const fruits = ev.target.result;
+                console.log(fruits);
+            }
+        }
+
+        function getGreenFruits(){
+            const transaccion = db.result.transaction(['Fruta'], 'readwrite');
+            const colorFruit = transaccion.objectStore('Fruta').index('color');
+            colorFruit.getAll('verde').onsuccess = function(ev){
+                const greenFruit = JSON.stringify(ev.target.result)
+                console.log('Frutas verdes ' + greenFruit);
+            }
+        }
+
+
+    </script>
+</body>
+</html>

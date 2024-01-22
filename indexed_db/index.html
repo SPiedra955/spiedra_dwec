@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indexed DB</title>
+</head>
+<body>
+
+    <a>a</a>
+
+    <script>
+
+        // This is what our customer data looks like.
+        const customerData = [
+        { ssn: "444-44-4444", name: "Bill", age: 35, email: "bill@company.com" },
+        { ssn: "555-55-5555", name: "Donna", age: 32, email: "donna@home.org" },
+        ];
+
+        let request = indexedDB.open("Samu", 6);
+        // Let us open our database
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+
+
+
+        const objectStore = db.createObjectStore('customers', {keyPath: "ssn"});
+        objectStore.createIndex("name_i", "name", { unique:false });
+        objectStore.createIndex("email_i", "email", { unique:true });
+
+        objectStore.transaction.oncomplete = function(event){
+            let customerObjectStore = db
+            .transaction("customers", "readwrite")
+            .objectStore("customers");
+
+            for(let i in customerData){
+                customerObjectStore.add(customerData[i]);
+            }
+        }
+
+        }
+/*
+        request.onsuccess = function(e){
+            const db = e.target.result;
+            const transaction = db.transaction("customers", "readwrite");
+            const customer = transaction.objectStore("customers");
+            customer.add({ ssn: "999-77-2222", name: "Samuel", age: 25, email: "samup@gmail.org" })
+        }
+*/
+
+    </script>
+</body>
+</html>
