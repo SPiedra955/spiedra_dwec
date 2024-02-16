@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon</title>
+</head>
+<body>
+    <div id="app">
+    <h1>Buscador de iconos</h1>
+    <!--
+        v-model para recoger el valor
+    -->
+    <input type="text" v-model="busqueda" placeholder="facebook" id="buscador" />
+    <button @click="buscarIcono">Buscar</button>
+    
+    <div>
+    <h2>{{ icon.label }}</h2>
+    <svg :height="icon.height" :width="icon.width" >
+        <path :d="icon.path"></path>
+    </svg>    
+    </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+
+        Vue.createApp({
+            data(){
+
+                return {
+                    busqueda : '',
+                    icon: {
+                        width: '',
+                        height: '',
+                        label: '',
+                        path: ''
+                    },
+                }
+
+            },
+
+            methods:{
+
+                async buscarIcono(){
+
+
+                const response = await fetch('http://34.90.153.139/ejercicios/icono.php?nombre=' + this.busqueda);
+                const data = await response.json();
+                console.log(data);
+                if(response.ok){
+                    this.icon.width = reponse.icon;
+                    this.icon.height = reponse.height;
+                    this.icon.label = reponse.label;
+                    this.icon.path = reponse.path;
+
+                    }   else{
+                        
+                    }                 
+                }
+
+            }
+        }).mount('#app');
+       
+
+
+   
+
+
+    </script>
+    
+</body>
+</html>

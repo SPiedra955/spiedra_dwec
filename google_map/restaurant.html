@@ -1,11 +1,12 @@
 <html>
   <head>
-    <title>Geolocation</title>
+    <title>Place Searches</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-    <script type="module" src="./index.js"></script>
+    <link rel="stylesheet" type="text/css" href="./rest.css" />
   </head>
+  <script type="module" src="./rest.js"></script>
+
   <body>
     <div id="map"></div>
 
@@ -16,9 +17,10 @@
       See https://developers.google.com/maps/documentation/javascript/load-maps-js-api
       for more information.
       -->
- <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaznNPj70AIVsl7EU5GHyryNZF-WuTc4o&callback=initMap&libraries=places&v=weekly"
-      defer
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaznNPj70AIVsl7EU5GHyryNZF-WuTc4o&callback=initMap&libraries=places&v=weekly"
+    defer
     ></script>
-  </body>
+
+  </body>   
 </html>

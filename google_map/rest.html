@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Obtener lugares cercanos</title>
+    <meta charset="utf-8" />
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaznNPj70AIVsl7EU5GHyryNZF-WuTc4o&callback=initMap&libraries=places&v=weekly"
+    defer
+  ></script>
+    <script>
+        var map;
+        var infowindow;
+
+        function initMap() {
+            // Creamos un mapa con las coordenadas actuales
+            navigator.geolocation.getCurrentPosition(function (pos) {
+
+                var lat = pos.coords.latitude;
+                var lon = pos.coords.longitude;
+
+                var myLatlng = new google.maps.LatLng(lat, lon);
+
+                var mapOptions = {
+                    center: myLatlng,
+                    zoom: 14,
+                    mapTypeId: google.maps.MapTypeId.SATELLITE
+                };
+
+                map = new google.maps.Map(document.getElementById("mapa"), mapOptions);
+
+                // Creamos el infowindow
+                infowindow = new google.maps.InfoWindow();
+
+                // Especificamos la localización y el tipo de lugares que queremos obtener
+                var request = {
+                    location: myLatlng,
+                    types: ['restaurant']
+                };
+
+                // Creamos el servicio PlaceService y enviamos la petición.
+                var service = new google.maps.places.PlacesService(map);
+
+                service.nearbySearch(request, function (results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        for (var i = 0; i < results.length; i++) { 
+                            crearMarcador(results[i]); 
+                        }
+                    }
+                });
+            });
+        } 
+        
+        function crearMarcador(place) { 
+            // Creamos un marcador 
+            var marker = new google.maps.Marker({ 
+                map: map, 
+                position: place.geometry.location 
+            }); 
+            // Asignamos el evento click del marcador
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            }); 
+        } 
+    </script>
+</head>
+
+<body onload="initMap()">
+    <h1>Obtener lugares cercanos</h1>
+    <div id="mapa" style="width: 450px; height: 350px;"></div>
+</body>
+
+</html>
