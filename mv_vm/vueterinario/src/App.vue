@@ -3,8 +3,6 @@
     <router-link to="/list">List</router-link> |
 
     <router-link to="/form">Form</router-link>
-    
-    
 
 
   </nav>

@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AnimalFormView from '../views/AnimalFormView.vue'
 import AnimalListView from '../views/AnimalListView.vue'
-
+import AnimalEdit from '../views/AnimalEdit.vue'
 const routes = [
   {
     path: '/',
@@ -28,11 +28,10 @@ const routes = [
     name: 'list',
     component: AnimalListView,
   },
-
   {
-    path: '/animal/id',
-    name: 'animalModify',
-    component: AnimalFormView,
+    path: '/edit/:id',
+    name: 'edit',
+    component: AnimalEdit,
   }
 ]
 

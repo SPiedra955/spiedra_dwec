@@ -1,5 +1,5 @@
 <template>
-    <h1>hi</h1>
+    <h1>Animales</h1>
     <table>
         <tr>
             <th>Nombre</th>
@@ -16,7 +16,7 @@
                 <span v-else>Sin registro</span>
             </td>
             <td>{{ a.tipo }}</td>
-            <td><router-link :to="'/animal/' + a.id">Editar</router-link></td>
+            <td><router-link :to="'/edit/' + a.id">Editar</router-link></td>
         </tr>
     </table>    
 </template>
