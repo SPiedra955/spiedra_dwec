@@ -2,24 +2,20 @@
   <div class="container-fluid">
     <header>
       <div class="row">
-        <input v-model="busqueda" type="search" id="search" name="search" placeholder="Buscar letra" @input="busquedaPorLetra()">
-        <p>letra: {{ busqueda }}</p>
+        <input v-model="busqueda" type="search" id="search" name="search" placeholder="Buscar letra"
+          @input="busquedaPorLetra()">
 
-        <button class="col-sm btn btn-danger btn-lg m-1" 
-        type="button" v-for="g in categorias" :key="g.id" @click="songsByCategory(g.id)"
-        >{{ g.nombre }}</button>
+        <button class="col-sm btn btn-danger btn-lg m-1" type="button" v-for="g in categorias" :key="g.id"
+          @click="songsByCategory(g.id)">{{ g.nombre }}</button>
       </div>
       <div class="row">
-        <button class="col-sm btn btn-primary btn-lg m-1" type="button">Order ascendente</button>
-        <button class="col-sm btn btn-primary btn-lg m-1" type="button" @click="orderAsc()">Order descendente</button>
+        <button class="col-sm btn btn-primary btn-lg m-1" type="button" @click="orderAsc">Order ascendente</button>
+        <button class="col-sm btn btn-primary btn-lg m-1" type="button" @click="orderDesc">Order descendente</button>
       </div>
     </header>
     <main>
       <div class="cancion" v-for="c in cancionesFilter" :key="c.id">
-        
-        <h1>{{ c.titulo }}</h1>
-        <span>{{ c.categoria_id }}</span><br>
-
+        <tarjeta :titulo="c.titulo" :fecha="c.fecha"></tarjeta>
         <span>{{ c.letra }}</span>
       </div>
     </main>
@@ -29,11 +25,16 @@
 <script>
 
 import canciones from '../../public/bbdd/canciones.json';
-import categoriaCanciones from  '../../public/bbdd/categorias.json';
+import categoriaCanciones from '../../public/bbdd/categorias.json';
+import tarjeta from '../components/Tarjeta.vue'
 
 
 export default {
   name: 'ListadoCanciones',
+  components: {
+    tarjeta,
+  }
+  ,
   data() {
     return {
       busqueda: '',
@@ -50,7 +51,6 @@ export default {
     this.songsByCategory();
     //console.log(this.cancionesFilter)
     this.busquedaPorLetra();
-    this.orderAsc();
   },
   methods: {
     getListado() {
@@ -63,28 +63,37 @@ export default {
     },
     getCategorias() {
       categoriaCanciones.forEach(categoria => {
-       // console.log('Categoria: ' + categoria.nombre);
+        // console.log('Categoria: ' + categoria.nombre);
         this.categorias.push(categoria);
       })
     },
-    songsByCategory(idCategoria){
-      if(idCategoria){
+    songsByCategory(idCategoria) {
+      if (idCategoria) {
         this.cancionesFilter = this.canciones.filter(cancion => cancion.categoria_id === idCategoria);
-      }else{
+      } else {
         this.cancionesFilter = this.canciones;
       }
     },
-    busquedaPorLetra(){
-      if(this.busqueda){
+    busquedaPorLetra() {
+      if (this.busqueda) {
         this.cancionesFilter = this.canciones.filter(cancion => cancion.letra.toLowerCase().includes(this.busqueda.toLowerCase()));
-      }else{
+      } else {
         this.cancionesFilter = this.canciones;
       }
     },
-    orderAsc(){
-
-      this.cancionesFilter 
-      
+    orderAsc: function (event) {
+      if (event) {
+        this.cancionesFilter = this.cancionesFilter.sort((a, b) => moment(a.fecha).format('YYYYMMDD') - moment(b.fecha).format('YYYYMMDD'));
+      } else {
+        this.cancionesFilter = this.canciones;
+      }
+    },
+    orderDesc: function (event) {
+      if (event) {
+        this.cancionesFilter = this.cancionesFilter.reverse((a, b) => moment(a.fecha).format('YYYYMMDD') - moment(b.fecha).format('YYYYMMDD'));
+      } else {
+        this.cancionesFilter = this.canciones;
+      }
     }
   }
 }

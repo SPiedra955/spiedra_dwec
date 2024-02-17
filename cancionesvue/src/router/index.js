@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Listado from '../views/Listado.vue'
-import SongsView from '../component/SongsView.vue'
+import SongsView from '../components/Tarjeta.vue'
 
 const routes = [
   {
@@ -8,11 +8,7 @@ const routes = [
     name: 'home',
     component: Listado
   },
-  {
-    path: '/categoria/id',
-    name: 'categories',
-    component: SongsView,
-  }
+
 ]
 
 const router = createRouter({
