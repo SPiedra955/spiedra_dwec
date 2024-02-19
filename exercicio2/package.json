@@ -1,33 +1,26 @@
 {
-  "name": "q-terinario",
+  "name": "exercicio2",
   "version": "0.0.1",
   "description": "A Quasar Project",
   "productName": "Quasar App",
-  "author": "SPiedra955 <samup60@gmail.com>",
+  "author": "Samuel Piedra <114516225+SPiedra955@users.noreply.github.com>",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
     "build": "quasar build"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.9",
+    "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
     "core-js": "^3.31.1",
+    "moment": "^2.30.1",
     "quasar": "^2.8.0",
-    "vue": "^3.4.18",
+    "vue": "3.4.15",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.13.14",
-    "@quasar/app-webpack": "^3.9.2",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.19.1",
-    "eslint-plugin-n": "^15.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-vue": "^9.21.1",
-    "eslint-webpack-plugin": "^3.1.1"
+    "@quasar/app-webpack": "^3.9.2"
   },
   "browserslist": [
     "last 10 Chrome versions",
